@@ -9,10 +9,11 @@ import './App.css';
 import Register from './components/auth/Register/Register';
 import Login from './components/auth/Login/Login';
 import NavbarCustom from './components/layout/NavbarCustom/NavbarCustom';
-import memberProfile from './pages/memberProfile';
-import searchBox from './components/searchBox/searchBox';
 
-if (localStorage.jwtToken) {
+
+
+import CreateUpdateProfile from './components/dashboard/CreateUpdateProfile/CreateUpdateProfile';
+if(localStorage.jwtToken){
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
   store.dispatch(setCurrentUser(decoded));
@@ -24,11 +25,11 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div>
-            <NavbarCustom />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={memberProfile} />
-            <Route exact path="/search" component={searchBox} />
+
+            <NavbarCustom/>
+            <Route exact path = "/register" component ={Register} />
+            <Route exact path = "/login" component = {Login}/>
+            <Route exact path = "/profile" component = {CreateUpdateProfile}/>
 
           </div>
         </Router>

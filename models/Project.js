@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const Schema  = mongoose.Schema;
 
-const Project = new Schema({
+const ProjectSchema = new Schema({
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: 'profiles'
+  },
   projName: {
     type: String,
     required: true
   },
   projDesc: {
     type: String,
-  },
-  profile: {
-    type: Schema.Types.ObjectId,
-    required: true
   },
   midiMap: {
     type: Object,
@@ -21,3 +21,4 @@ const Project = new Schema({
     default: Date.now()
   }
 });
+module.exports = Project = mongoose.model('projects', ProjectSchema);
