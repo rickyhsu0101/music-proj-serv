@@ -18,10 +18,11 @@ class SearchBox extends Component {
           placeholder="Search for..."
           ref={input => this.search = input}
           onChange={this.handleInputChange}
-
         />
         <p>{this.state.query}</p>
       </form>
+
+
     )
   }
 }
