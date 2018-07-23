@@ -9,7 +9,7 @@ export const registerUser = (userData, history)=>dispatch =>{
         history.push('/login');
         dispatch({
           type: GET_ERRORS,
-          payload: {}
+          payload: {name: null, email: null, password: null, password2: null}
         });
       })
       .catch(err=>
@@ -29,13 +29,13 @@ export const loginUser = (userData, history)=>dispatch => {
       const decoded = jwt_decode(token);
       dispatch({
         type: GET_ERRORS,
-        payload: {}
+        payload: {name: null, email: null, password: null}
       });
       dispatch({
         type: SET_CURRENT_USER,
         payload: decoded
       });
-      history.push("/");
+      history.push("/profile");
     })
     .catch(err =>
       dispatch({

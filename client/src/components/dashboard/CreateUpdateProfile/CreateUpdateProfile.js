@@ -1,9 +1,50 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {withRouter, Link} from 'react-router-dom';
 import isEmpty from '../../../validation/isEmpty';
+import {createUpdateProfile, searchOwnProfile} from '../../../actions/dashboardActions';
+import {
+  Container,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  FormFeedback,
+  Row,
+  Col
+} from 'reactstrap';
 class CreateUpdateProfile extends Component{
   state = {
-    handle: ''
+    index: 0,
+    handle: '',
+    bio: ''
+  }
+  componentWillMount(){
+    this.props.searchOwnProfile();
+  }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      bio: nextProps.profile.profile.bio,
+      handle: nextProps.profile.profile.handle
+    });
+  }
+  change=(e)=>{
+    e.preventDefault();
+    const {name, value} = e.target;
+    this.setState({
+      [name]: value
+    });
+  }
+  submit=(e)=>{
+    e.preventDefault();
+    const {handle, bio} = this.state;
+    console.log(handle+ " "+ bio);
+    this.props.createUpdateProfile({
+      handle,
+      bio
+    }, this.props.history);
   }
   render(){
     return (
@@ -12,34 +53,37 @@ class CreateUpdateProfile extends Component{
         <Row>
           <Col xs={3}></Col>
           <Col xs={6}>
+            {!this.props.errors.noprofile?<Link to ="/dashboard"><Button>Back</Button></Link>:""}
             <Form id = "profileUpdateCont" onSubmit = {(e)=>this.submit(e)}>
               <h3 className = "head"><strong>{isEmpty(this.props.profile.profile)?"Create Profile":"Update Profile"}</strong></h3>
               <hr/>
               <FormGroup>
-                <Label for="handleInput"><b>Email</b></Label>
+                <Label for="handleInput"><b>Select handle</b></Label>
                 <Input 
                   type="text" 
                   name="handle"
                   id="handleInput" 
-                  placeholder="Enter Email" 
+                  value = {this.state.handle}
+                  placeholder="Enter Handle" 
                   onChange = {(e)=>this.change(e)}
-                  invalid = {(this.props.errors.email)? true:false}
+                  invalid = {(this.props.errors.handle)? true:false}
                 />
-                <FormFeedback>{this.props.errors.email}</FormFeedback>
+                <FormFeedback>{this.props.errors.handle}</FormFeedback>
               </FormGroup>
               <FormGroup>
-                <Label for="passwordInput"><strong>Password</strong></Label>
+                <Label for="bioInput"><strong>Biography</strong></Label>
                 <Input 
-                  type="password" 
-                  name="password" 
-                  id="passwordInput" 
-                  placeholder="Enter Password" 
+                  type="textArea" 
+                  name="bio" 
+                  id="bioInput" 
+                  value={this.state.bio}
+                  placeholder="Enter Biography" 
                   onChange = {(e)=>this.change(e)}
-                  invalid = {(this.props.errors.password)? true:false}
+                  invalid = {(this.props.errors.bio)? true:false}
                 />
+                <FormFeedback>{this.props.errors.bio}</FormFeedback>
               </FormGroup>
-              <FormFeedback>{this.props.errors.password}</FormFeedback>
-              <Button id = "loginButton">Login</Button>
+              <Button id = "updateProfile">{this.props.errors.noprofile? "Create":"Update"}</Button>
             </Form>
           </Col>
           <Col xs={3}></Col>
@@ -53,4 +97,4 @@ const mapStateToProps=(state)=>({
   profile: state.profile,
   errors: state.errors
 });
-export default connect(null, {})(CreateUpdateProfile);
+export default connect(mapStateToProps, {createUpdateProfile, searchOwnProfile})(withRouter(CreateUpdateProfile));
