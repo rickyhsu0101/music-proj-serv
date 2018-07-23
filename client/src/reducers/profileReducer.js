@@ -1,7 +1,7 @@
 import {SET_PROFILE} from '../actions/types';
 import isEmpty from '../validation/isEmpty';
 const initialState = {
-  hasProfile = false,
+  hasProfile: false,
   profile: {}
 };
 export default (state = initialState, action)=>{
@@ -14,5 +14,6 @@ export default (state = initialState, action)=>{
       };
     default:
       return state;
+      
   }
 }

@@ -13,7 +13,7 @@ export const searchOwnProfile = ()=>dispatch=>{
         payload: {}
       })
     })
-    .error(err=>{
+    .catch(err=>{
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data

@@ -54,6 +54,7 @@ class Login extends Component{
                   type="email" 
                   name="email"
                   id="emailInput" 
+                  value={this.state.email}
                   placeholder="Enter Email" 
                   onChange = {(e)=>this.change(e)}
                   invalid = {(this.props.errors.email)? true:false}
@@ -66,6 +67,7 @@ class Login extends Component{
                   type="password" 
                   name="password" 
                   id="passwordInput" 
+                  value={this.state.password}
                   placeholder="Enter Password" 
                   onChange = {(e)=>this.change(e)}
                   invalid = {(this.props.errors.password)? true:false}

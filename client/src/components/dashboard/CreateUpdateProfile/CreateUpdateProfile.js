@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import isEmpty from '../../../validation/isEmpty';
 class CreateUpdateProfile extends Component{
   state = {
-
+    handle: ''
   }
   render(){
     return (
@@ -16,11 +16,11 @@ class CreateUpdateProfile extends Component{
               <h3 className = "head"><strong>{isEmpty(this.props.profile.profile)?"Create Profile":"Update Profile"}</strong></h3>
               <hr/>
               <FormGroup>
-                <Label for="emailInput"><b>Email</b></Label>
+                <Label for="handleInput"><b>Email</b></Label>
                 <Input 
-                  type="email" 
-                  name="email"
-                  id="emailInput" 
+                  type="text" 
+                  name="handle"
+                  id="handleInput" 
                   placeholder="Enter Email" 
                   onChange = {(e)=>this.change(e)}
                   invalid = {(this.props.errors.email)? true:false}
