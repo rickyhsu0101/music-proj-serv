@@ -57,9 +57,9 @@ router.post('/', passport.authenticate('jwt', {session:false}), (req, res)=>{
         errors.noprofile =true;
         return res.status(400).json(errors);
       }else{
-        if(!isEmpty(req.body.projectId)){
+        if(!isEmpty(req.body.projectID)){
           Project.findOneAndUpdate(
-            {id: req.body.projectId}, 
+            {id: req.body.projectID}, 
             {$set: {
               midiMap: req.body.midiMap,
               projName: req.body.projName,

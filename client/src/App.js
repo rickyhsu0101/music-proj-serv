@@ -15,6 +15,8 @@ import SearchBox from './components/SearchBox/SearchBox';
 import SearchResults from './pages/SearchResults'
 
 import CreateUpdateProfile from './components/dashboard/CreateUpdateProfile/CreateUpdateProfile';
+import PianoContainer from './components/main/PianoContainer/PianoContainer';
+import DashboardContainer from './components/dashboard/DashboardContainer/DashboardContainer';
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
@@ -31,10 +33,10 @@ class App extends Component {
             <NavbarCustom />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={CreateUpdateProfile} />
+            <Route exact path="/dashboard" component={DashboardContainer}/>
             <Route exact path="/search" component={SearchBox} />
             <Route exact path="/results" component={SearchResults} />
-
+            <Route path = "/project" component={PianoContainer}/>
           </div>
         </Router>
       </Provider>

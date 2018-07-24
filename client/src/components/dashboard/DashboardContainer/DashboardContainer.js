@@ -4,9 +4,13 @@ import CreateUpdateProfile from '../CreateUpdateProfile/CreateUpdateProfile';
 import {searchOwnProfile} from '../../../actions/dashboardActions';
 class DashboardContainer extends Component{
   componentWillMount(){
+    if (!this.props.auth.isAuthenticated) {
+      this.history.push("/login");
+    }
     this.props.searchOwnProfile();
   }
   render(){
+    
     return(
       <div>
         {!this.props.errors.noprofile? "": <CreateUpdateProfile/>}

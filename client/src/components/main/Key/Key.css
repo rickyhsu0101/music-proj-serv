@@ -1,0 +1,18 @@
+.key{
+  border-radius: 5px;
+  height: 50px;
+  width: 100%;
+  border: 1px solid #35d6dc;
+}
+.white{
+  background-color: white;
+}
+.black{
+  background-color: black;
+}
+.black:hover{
+  background-color: rgb(66, 66, 66);
+}
+.white:hover{
+  background-color: rgb(219, 219, 219);
+}
